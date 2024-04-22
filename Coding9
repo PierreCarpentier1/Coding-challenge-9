@@ -1,0 +1,124 @@
+#Module 3 Coding Challenge 
+rm(list=ls())
+pop <- read.csv("pop.csv")
+flows <- read.csv("county_flows.csv")
+
+pop
+flows
+
+df <- merge(pop,flows)
+
+
+df$in_pct <- df$BtoAflow / df$population2020
+df$out_pct <- df$AtoBflow / df$population2020
+df$tot_pct <- df$AandBgrossflow / df$population2020
+df$net_pct <- df$BtoAnetflow / df$population2020
+
+df$uniq_location <- paste(df$stateAname, df$countyAname)
+
+mean_in <- by(df$in_pct, df$uniq_location, mean)
+median_in <- by(df$in_pct, df$uniq_location, median)
+min_in <- by(df$in_pct, df$uniq_location, min)
+max_in <- by(df$in_pct, df$uniq_location, max)
+sd_in <- by(df$in_pct, df$uniq_location, sd)
+
+
+mean_out <- by(df$out_pct, df$uniq_location, mean)
+median_out <- by(df$out_pct, df$uniq_location, median)
+min_out <- by(df$out_pct, df$uniq_location, min)
+max_out <- by(df$out_pct, df$uniq_location, max)
+sd_out <- by(df$out_pct, df$uniq_location, sd)
+
+
+pop$uniq_location <- paste(pop$stateAname, pop$countyAname)
+
+out_df <- merge(pop,mean_in)
+out_df <- merge(out_df,median_in)
+out_df <- merge(out_df,min_in)
+out_df <- merge(out_df,max_in)
+out_df <- merge(out_df,sd_in)
+out_df <- merge(out_df,mean_out)
+out_df <- merge(out_df,median_out)
+out_df <- merge(out_df,min_out)
+out_df <- merge(out_df,max_out)
+out_df <- merge(out_df,sd_out)
+
+#Module 2
+#count from 1 to 1000
+
+seq <- 1:1000
+
+#if the number is divisible by 3, print "Fizz"
+
+for(item in 0:1000){
+  if(item %% 3 == 0 ){
+    print("Fizz")
+  } else{
+    print(item)
+  }
+}
+
+#if the number is divisible by 5, print "Buzz"
+
+for(item in 0:1000){
+  if(item %% 5 == 0 ){
+    print("Buzz")
+  } else{
+    print(item)
+  }
+}
+
+#if the number is divisible by 3 and 5, print "FizzBuzz!"
+
+for(item in 0:1000){
+  if(item %% 3 == 0 && item %% 5 == 0) {
+    print("FizzBuzz!")
+  } else{
+    print(item)
+  }
+}
+
+  
+
+
+  
+#Fibonacci_numbers
+fibonacci_maker <- function(n){
+  fibonacci_numbers <- numeric(1000) 
+  fibonacci_numbers[2] <- 1 
+  for(f in 3:1000){
+  fibonacci_numbers[f] <- fibonacci_numbers[f-1] + fibonacci_numbers[f-2]
+  }
+  return(fibonacci_numbers)
+}
+
+fibs <- fibonacci_maker(1000)
+
+check_fizzbuzz <- function(n){ 
+    is_divis_3 <- i %% 3 == 0
+    is_divis_5 <- i %% 5 == 0
+    if(is_divis_3 & is_divis_5){
+      return("Fizzbuzz!")
+    } else if(is_divis_3){
+      return("Fizz")
+    } else if(is_divis_5){
+      return("Buzz")
+    } else {
+      return(n)
+    }    
+}  
+
+  
+fibbuzz <- function(n){
+  is_fib <- i %in% fibs
+  if(is_fib){
+    print(paste("fib", check_fizzbuzz(n)
+  } else {
+    return(check_fizzbuzz(n))
+  }
+}
+
+  
+  
+for(i in 1:1000){  
+}  
